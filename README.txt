@@ -1,0 +1,4 @@
+This project is a fully-functional basic calculator. It can compute with basic addition, subtraction, multiplication, and division. It can change signs, add decimals, and generate an answer rounded to 6 digits, prioritizing whole numbers over decimals.
+
+What I learned:
+A ton more about javascript. I am beginning to feel some concrete confidence in my application of javascript now. I actually rewrote this program entirely one time, because I felt like I was learning improved ways of writing code (not to say I am an expert in ANY WAY). But I got to a point that my old coding style felt messy comparatively, and I felt like I could do better. This code I have generated gets the job done, but I feel like it is still a jumbled mess, and could certainly be refined. I plan on looking at all of my projects at the end or nearing the end of the course, and looking to optimize them, and make them portfolio ready! I really look forward to that day.
