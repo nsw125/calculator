@@ -1,1 +1,183 @@
+<!DOCTYPE HTML>
+<head>
+    <link rel='stylesheet' href='styles.css'>
+</head>
+<body>
+  <h1>
+    Calculator
+  </h1>
 
+  
+  <div class="container">
+    <div class='display'>
+        <div class='numbers'></div>
+    </div>
+    <div id="inputButtons">
+        <button class="clearButton">CE</button>
+        <button class='clearAllButton'>C</button>
+        <button class='backspaceButton'>Del</button>
+        <button id='%' class='operator'>%</button>
+        <button id="7" class='integer'>7</button>
+        <button id='8' class='integer'>8</button>
+        <button id='9' class='integer'>9</button>
+        <button id='*' class='operator'>*</button>
+        <button id='4' class='integer'>4</button>
+        <button id='5' class='integer'>5</button>
+        <button id='6' class='integer'>6</button>
+        <button id='-' class='operator'>-</button>
+        <button id='1' class='integer'>1</button>
+        <button id='2' class='integer'>2</button>
+        <button id='3' class='integer'>3</button>
+        <button id='+' class='operator'>+</button>
+        <button class='changeSign'>+/-</button>
+        <button id='0' class='integer'>0</button>
+        <button id='.' class='decimal'>.</button>
+        <button id="equalbutton">=</button>
+    </div>
+<button class='values'>show values</button>
+  </div>
+
+    <script>
+        let currentEntry;
+        let firstNumber;
+        let secondNumber;
+        let operator;
+        let result;
+        let add = (firstNumber, secondNumber) => Number(firstNumber) + Number(secondNumber);
+        let subtract = (firstNumber, secondNumber) => Number(firstNumber) - Number(secondNumber);
+        let multiply = (firstNumber, secondNumber) => Number(firstNumber) * Number(secondNumber);
+        let divide = (firstNumber, secondNumber) => (secondNumber == '0') ? "Not gonna happen." : Number(firstNumber) / Number(secondNumber);
+        function calculate(){
+            console.log('Current entry: ' + currentEntry);
+            console.log('First number: ' + firstNumber);
+            console.log('Second number: ' + secondNumber);
+            console.log('Operator: ' + operator);
+            if(operator == '+'){
+                result = add(firstNumber, secondNumber);
+            } else if(operator == '-'){
+                result = subtract(firstNumber, secondNumber);
+            } else if(operator == '*'){
+                result = multiply(firstNumber, secondNumber);
+            } else if(operator = '%'){
+                result = divide(firstNumber, secondNumber);
+            }
+            let answer = result.toString();
+            console.log(answer);
+            if(answer.length > 8){
+            numbers.textContent = result.toPrecision(6);
+            } else {
+            numbers.textContent = result;
+            }
+            firstNumber = result;
+            console.log('Result: ' + result);
+        }
+        function updateDisplay(){
+            numbers.textContent = currentEntry;
+        }
+        function storeFinishedNumber(){
+            if(firstNumber == undefined){
+                return firstNumber = currentEntry;
+            } else {
+                return secondNumber = currentEntry;
+            }
+        }
+        equalbutton.addEventListener('click', (e) =>{
+            storeFinishedNumber();
+            if(firstNumber == undefined || operator == undefined || secondNumber == undefined){
+                alert('A complete function has not been entered!');
+            } else {
+                operate();
+            }
+        });
+        function operate(){
+            clearCurrentEntry();
+            calculate();
+        }
+        const numbers = document.querySelector('.numbers');
+        const integerInput = inputButtons.querySelectorAll('.integer');
+        integerInput.forEach((button) =>{
+            button.addEventListener('click', (e) => {
+                if(currentEntry == undefined){
+                    currentEntry = button.id;
+                } else {
+                    currentEntry += button.id;
+                }
+                updateDisplay();
+                console.log(currentEntry);
+                return currentEntry;
+            });
+        });
+        function integerPress(){
+            
+        }
+        const operatorInput = inputButtons.querySelectorAll('.operator');
+        operatorInput.forEach((button) => {
+            button.addEventListener('click', (e) => {
+                storeFinishedNumber();
+                clearCurrentEntry();
+                console.log('operator: ' + button.id);
+                if(secondNumber !== undefined){
+                    calculate();
+                }
+                return operator = button.id;
+            });
+        });
+        const clearAll = inputButtons.querySelector('.clearAllButton');
+        clearAll.addEventListener('click', (e) => {
+                clearCurrentEntry();
+                firstNumber = undefined;
+                secondNumber = undefined;
+                operator = undefined;
+                updateDisplay();
+        });
+        const clearButton = inputButtons.querySelector('.clearButton');
+        clearButton.addEventListener('click', clearCurrentEntry);
+        function clearCurrentEntry(){
+            currentEntry = undefined; 
+            updateDisplay();
+        }
+        const backspaceButton = inputButtons.querySelector('.backspaceButton');
+        backspaceButton.addEventListener('click', (e) =>{
+            let removeLast = currentEntry.substring(0, currentEntry.length - 1);
+            console.log(removeLast);
+            currentEntry = removeLast;
+            updateDisplay();
+        });
+        const decimal = inputButtons.querySelector('.decimal');
+        decimal.addEventListener('click', (e) => {
+            if(currentEntry == undefined){
+                currentEntry = '.';
+            }
+            let checkDecimal = currentEntry.indexOf('.');
+            console.log(checkDecimal);
+            if(checkDecimal == -1){
+                    currentEntry += '.';
+            } else {
+            }
+            updateDisplay();
+        });
+        const changeSign = inputButtons.querySelector('.changeSign');
+        changeSign.addEventListener('click', (e) => {
+            if(currentEntry == undefined){
+                currentEntry = '-'    
+            } else if(currentEntry[0] !== '-'){
+                currentEntry = '-' + currentEntry;
+            } else if(currentEntry[0] == '-'){
+                currentEntry = currentEntry.slice(1);
+            }
+            console.log(currentEntry);
+            updateDisplay();
+        });
+    
+        const test = document.querySelector('.values');
+        test.addEventListener('click', (e) =>{
+            console.log('First Number: ' + firstNumber);
+            console.log('Second number: ' + secondNumber);
+            console.log('Operator: ' + operator);
+            console.log('Current Entry: ' +currentEntry);
+            console.log('Result: ' + result);
+        })
+    </script>
+
+</body>
+</html>
